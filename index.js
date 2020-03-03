@@ -58,8 +58,12 @@ const workingDirectory =
  * When running "npm install" or any other Cypress-related commands,
  * use the install directory as current working directory
  */
+const defaultCommandOptions = {
+  cwd: workingDirectory
+}
+
 const cypressCommandOptions = {
-  cwd: workingDirectory,
+  ...defaultCommandOptions,
   env: cypressEnv
 }
 
@@ -175,7 +179,7 @@ const install = () => {
       return exec.exec(
         quote(yarnPath),
         ['--frozen-lockfile'],
-        cypressCommandOptions
+        defaultCommandOptions
       )
     })
   } else {
@@ -184,7 +188,7 @@ const install = () => {
 
     return io.which('npm', true).then(npmPath => {
       core.debug(`npm at "${npmPath}"`)
-      return exec.exec(quote(npmPath), ['ci'], cypressCommandOptions)
+      return exec.exec(quote(npmPath), ['ci'], defaultCommandOptions)
     })
   }
 }
@@ -227,7 +231,7 @@ const buildAppMaybe = () => {
 
   core.debug(`building application using "${buildApp}"`)
 
-  return exec.exec(buildApp, [], cypressCommandOptions)
+  return exec.exec(buildApp, [], defaultCommandOptions)
 }
 
 const startServerMaybe = () => {
