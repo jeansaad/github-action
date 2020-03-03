@@ -52,7 +52,7 @@ const workingDirectory =
  */
 const cypressCommandOptions = {
   cwd: workingDirectory,
-  env: core.getInput('env')
+  env: core.getInput('env') || {}
 }
 
 const yarnFilename = path.join(
