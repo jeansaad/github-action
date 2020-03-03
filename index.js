@@ -45,7 +45,9 @@ const platformAndArch = `${process.platform}-${process.arch}`
 
 const httpProxy = core.getInput('http-proxy')
 
-let cypressEnv = {}
+let cypressEnv = {
+  ...process.env
+}
 
 if (httpProxy) {
   cypressEnv['HTTP_PROXY'] = httpProxy
