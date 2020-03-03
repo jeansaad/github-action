@@ -43,6 +43,14 @@ const isWindows = () => os.platform() === 'win32'
 const homeDirectory = os.homedir()
 const platformAndArch = `${process.platform}-${process.arch}`
 
+const httpProxy = core.getInput('http-proxy')
+
+let cypressEnv = {}
+
+if (httpProxy) {
+  cypressEnv['HTTP_PROXY'] = httpProxy
+}
+
 const workingDirectory =
   core.getInput('working-directory') || process.cwd()
 
@@ -52,7 +60,7 @@ const workingDirectory =
  */
 const cypressCommandOptions = {
   cwd: workingDirectory,
-  env: core.getInput('env') || {}
+  env: cypressEnv
 }
 
 const yarnFilename = path.join(

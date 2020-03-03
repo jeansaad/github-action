@@ -14,6 +14,10 @@ inputs:
     description: 'Path to a JSON file where configuration values are set.'
     required: false
     default: cypress.json
+  http-proxy:
+    description: 'URL for HTTP Proxy to route traffic through.'
+    required: false
+    default: null
   env:
     description: 'Sets Cypress environment variables'
     required: false
