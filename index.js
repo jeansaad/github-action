@@ -51,7 +51,8 @@ const workingDirectory =
  * use the install directory as current working directory
  */
 const cypressCommandOptions = {
-  cwd: workingDirectory
+  cwd: workingDirectory,
+  env: core.getInput('env')
 }
 
 const yarnFilename = path.join(
